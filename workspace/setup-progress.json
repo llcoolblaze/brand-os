@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "mode": null,
+  "started_at": null,
+  "last_activity": null,
+  "current_phase": null,
+  "phases": {
+    "1": {
+      "name": "Foundation",
+      "status": "pending",
+      "files": {
+        "_synthesis/master-narrative.md": "pending",
+        "01-gtm-strategy/icp.md": "pending",
+        ".claude/voice-dna/brand-voice.md": "pending"
+      }
+    },
+    "2": {
+      "name": "Strategy",
+      "status": "locked",
+      "files": {
+        "01-gtm-strategy/positioning.md": "pending",
+        "01-gtm-strategy/pricing.md": "pending"
+      }
+    },
+    "3": {
+      "name": "Execution",
+      "status": "locked",
+      "files": {
+        "04-linkedin-content/content-pillars.md": "pending",
+        "02-outbound-systems/sequences.md": "pending",
+        "03-sales-execution/discovery-questions.md": "pending",
+        "03-sales-execution/objection-handling.md": "pending",
+        "03-sales-execution/deal-playbook.md": "pending"
+      }
+    },
+    "4": {
+      "name": "Operations",
+      "status": "locked",
+      "files": {
+        "07-revenue-ops/lead-scoring.md": "pending",
+        "07-revenue-ops/metrics-dashboard.md": "pending",
+        "02-outbound-systems/pipeline-stages.md": "pending",
+        "07-revenue-ops/crm-setup.md": "pending"
+      }
+    },
+    "5": {
+      "name": "Growth",
+      "status": "locked",
+      "files": {
+        "05-marketing-demand/seo-strategy.md": "pending",
+        "05-marketing-demand/paid-campaigns.md": "pending",
+        "05-marketing-demand/campaign-calendar.md": "pending",
+        "04-linkedin-content/engagement-strategy.md": "pending",
+        "04-linkedin-content/post-templates.md": "pending"
+      }
+    },
+    "6": {
+      "name": "Specialized",
+      "status": "skippable",
+      "files": {
+        "02-outbound-systems/clay-enrichment.md": "pending",
+        "10-tools/tool-stack.md": "pending",
+        "10-tools/competitive-intel.md": "pending",
+        "08-startup-ops/validation-framework.md": "pending",
+        "08-startup-ops/fundraising-prep.md": "pending",
+        "09-consulting-clients/client-template.md": "pending",
+        "09-consulting-clients/engagement-tracker.md": "pending"
+      }
+    },
+    "7": {
+      "name": "Synthesis",
+      "status": "locked",
+      "files": {
+        "_synthesis/master-narrative.md": "pending",
+        "_evidence/research-log.md": "pending",
+        "06-ai-tooling/agent-catalog.md": "pending",
+        "06-ai-tooling/mcp-integrations.md": "pending",
+        "06-ai-tooling/prompt-library.md": "pending"
+      }
+    }
+  },
+  "intake_answers": {}
+}

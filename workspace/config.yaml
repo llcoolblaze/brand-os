@@ -1,0 +1,10 @@
+# Brand OS Configuration
+# Managed by: node scripts/config.mjs set <key> <value>
+
+company_name: ""
+default_persona: ""
+active_channels: [email, linkedin]
+content_length: standard
+auto_learnings: true
+voice_strictness: high
+setup_mode: full

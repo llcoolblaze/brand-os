@@ -1,0 +1,46 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Dependencies
+node_modules/
+
+# Dashboard build output
+dashboard/dist/
+
+# Logs
+*.log
+
+# Scratch/temp work
+workspace/scratch/
+
+# User-specific learnings (generated during use)
+workspace/learnings.jsonl
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Claude Code internal state (not part of the template)
+.claude/settings.local.json
+.claude/memory/
+.claude/plans/
+.claude/projects/
+
+# Package locks (users will generate their own)
+dashboard/package-lock.json
+
+# Reference projects (not part of Brand OS)
+gstack-main/
+paperclip-master*/
+
+# Reference images
+IMG_*.jpg
