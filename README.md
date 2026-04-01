@@ -249,4 +249,4 @@ MIT. Free forever. Go build something.
 
 ---
 
-Built by [WRTH.it](https://wrth.it) for the Claude Code community.
+Built by [llcoolblaze](https://x.com/llcoolblaze) for the Claude Code community.
