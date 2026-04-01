@@ -1,0 +1,37 @@
+{
+  "name": "brand-os",
+  "version": "0.1.0",
+  "description": "Open-source GTM operating system for Claude Code",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "setup": "node scripts/setup.mjs",
+    "health": "node scripts/health-check.mjs",
+    "digest": "node scripts/auto-process-all.mjs",
+    "learnings": "node scripts/learnings-search.mjs",
+    "config": "node scripts/config.mjs",
+    "dashboard": "cd dashboard && npm install && npm run dashboard",
+    "dashboard:dev": "cd dashboard && npm install && npm run dev",
+    "test": "node scripts/test.mjs",
+    "postinstall": "echo '\\n  Brand OS installed. Run: claude\\n  Then say: setup\\n'"
+  },
+  "keywords": [
+    "claude-code",
+    "gtm",
+    "go-to-market",
+    "ai-copilot",
+    "brand",
+    "marketing",
+    "sales",
+    "outbound"
+  ],
+  "author": "WRTH.it",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/llcoolblaze/brand-os.git"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

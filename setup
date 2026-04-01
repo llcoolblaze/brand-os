@@ -1,0 +1,124 @@
+#!/usr/bin/env bash
+set -e
+
+# ─── Brand OS Setup ──────────────────────────────────────
+# One command to verify your environment and get started.
+
+VERSION=$(cat "$(dirname "$0")/VERSION" 2>/dev/null || echo "unknown")
+
+echo ""
+echo "  ┌─────────────────────────────────────┐"
+echo "  │         B R A N D   O S              │"
+echo "  │         v${VERSION}                       │"
+echo "  │         GTM Operating System         │"
+echo "  └─────────────────────────────────────┘"
+echo ""
+
+# ─── Check prerequisites ──────────────────────────────────
+
+MISSING=0
+
+check() {
+  if command -v "$1" &> /dev/null; then
+    printf "  ✓ %-20s %s\n" "$1" "$(command -v "$1")"
+  else
+    printf "  ✗ %-20s MISSING\n" "$1"
+    MISSING=1
+  fi
+}
+
+echo "  Checking prerequisites..."
+echo ""
+check "node"
+check "git"
+check "claude"
+echo ""
+
+if [ "$MISSING" -eq 1 ]; then
+  echo "  Some prerequisites are missing."
+  echo "  Install them and re-run ./setup"
+  echo ""
+  echo "  Node.js 18+:    https://nodejs.org"
+  echo "  Claude Code:     https://claude.ai/code"
+  echo ""
+  exit 1
+fi
+
+# ─── Check Node version ──────────────────────────────────
+
+NODE_MAJOR=$(node -v | sed 's/v//' | cut -d. -f1)
+if [ "$NODE_MAJOR" -lt 18 ]; then
+  echo "  ✗ Node.js 18+ required (found v$(node -v))"
+  exit 1
+fi
+
+# ─── Verify project structure ─────────────────────────────
+
+echo "  Verifying project structure..."
+
+DIRS=(
+  "my-context-os"
+  ".claude/skills"
+  ".claude/voice-dna"
+  "scripts"
+  "workspace"
+)
+
+ALL_OK=1
+for dir in "${DIRS[@]}"; do
+  if [ -d "$dir" ]; then
+    printf "  ✓ %s\n" "$dir"
+  else
+    printf "  ✗ %s — MISSING\n" "$dir"
+    ALL_OK=0
+  fi
+done
+echo ""
+
+if [ "$ALL_OK" -eq 0 ]; then
+  echo "  Project structure is incomplete."
+  echo "  Make sure you cloned the full repo."
+  exit 1
+fi
+
+# ─── Run health check ────────────────────────────────────
+
+echo "  Running health check..."
+echo ""
+node scripts/health-check.mjs
+echo ""
+
+# ─── Install dashboard (optional) ────────────────────────
+
+if [ -d "dashboard" ]; then
+  echo "  ─────────────────────────────────────"
+  echo ""
+  read -p "  Install dashboard dependencies? [y/N] " -n 1 -r
+  echo ""
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "  Installing dashboard..."
+    cd dashboard && npm install --silent && cd ..
+    echo "  ✓ Dashboard ready (run: npm run dashboard)"
+  else
+    echo "  Skipped. Install later with: cd dashboard && npm install"
+  fi
+  echo ""
+fi
+
+# ─── Done ─────────────────────────────────────────────────
+
+echo "  ─────────────────────────────────────"
+echo ""
+echo "  Setup complete. Next steps:"
+echo ""
+echo "  1. Open Claude Code:"
+echo "     claude"
+echo ""
+echo "  2. Say:"
+echo "     setup"
+echo ""
+echo "  3. Or launch the dashboard:"
+echo "     npm run dashboard"
+echo ""
+echo "  ─────────────────────────────────────"
+echo ""

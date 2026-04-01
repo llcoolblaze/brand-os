@@ -20,6 +20,31 @@ import { join, relative } from 'node:path';
 
 const ROOT = decodeURIComponent(new URL('../my-context-os', import.meta.url).pathname);
 
+// Help flag
+if (process.argv.includes('--help') || process.argv.includes('-h')) {
+  console.log(`
+  Auto Process All — Daily pipeline runner and digest generator
+
+  Scans the knowledge base and generates a prioritized daily digest:
+    - Documents needing review (stale or needs-review status)
+    - Active items requiring attention
+    - Cross-domain coverage gaps
+    - Template files still needing customization
+
+  Usage:
+    node scripts/auto-process-all.mjs
+
+  Examples:
+    node scripts/auto-process-all.mjs
+    node scripts/auto-process-all.mjs > workspace/daily-digest.md
+    node scripts/auto-process-all.mjs | less
+
+  Flags:
+    --help, -h    Show this help message
+  `);
+  process.exit(0);
+}
+
 function parseFrontmatter(content) {
   const match = content.match(/^---\n([\s\S]*?)\n---/);
   if (!match) return null;

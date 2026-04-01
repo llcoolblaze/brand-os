@@ -13,38 +13,33 @@ interface SetupPhaseBarProps {
 
 const statusConfig: Record<
   Phase["status"],
-  { icon: React.ComponentType<{ className?: string }>; color: string; bg: string }
+  { icon: React.ComponentType<{ className?: string }>; style: string }
 > = {
   locked: {
     icon: Lock,
-    color: "text-gray-400 dark:text-gray-500",
-    bg: "bg-gray-100 dark:bg-gray-800",
+    style: "border-foreground/20 text-foreground/30",
   },
   pending: {
     icon: Circle,
-    color: "text-gray-400 dark:text-gray-500",
-    bg: "bg-gray-100 dark:bg-gray-800",
+    style: "border-foreground/40 text-foreground/50",
   },
   "in-progress": {
     icon: Loader,
-    color: "text-blue-600 dark:text-blue-400",
-    bg: "bg-blue-50 dark:bg-blue-950",
+    style: "border-foreground bg-foreground text-background",
   },
   complete: {
     icon: CheckCircle,
-    color: "text-emerald-600 dark:text-emerald-400",
-    bg: "bg-emerald-50 dark:bg-emerald-950",
+    style: "border-foreground bg-foreground text-background",
   },
   skippable: {
     icon: Circle,
-    color: "text-amber-600 dark:text-amber-400",
-    bg: "bg-amber-50 dark:bg-amber-950",
+    style: "border-foreground/60 text-foreground/70 border-dashed",
   },
 };
 
 export function SetupPhaseBar({ phases }: SetupPhaseBarProps) {
   return (
-    <div className="flex gap-1 overflow-x-auto pb-1">
+    <div className="flex gap-0 overflow-x-auto">
       {phases.map((phase, i) => {
         const config = statusConfig[phase.status];
         const Icon = config.icon;
@@ -53,22 +48,22 @@ export function SetupPhaseBar({ phases }: SetupPhaseBarProps) {
           <div
             key={i}
             className={cn(
-              "flex flex-1 min-w-[120px] items-center gap-2 rounded-lg px-3 py-2.5 text-xs",
-              config.bg
+              "flex flex-1 min-w-[110px] items-center gap-2 border px-3 py-3 text-xs",
+              config.style,
+              i > 0 && "-ml-px"
             )}
           >
             <Icon
               className={cn(
-                "size-4 shrink-0",
-                config.color,
+                "size-3.5 shrink-0",
                 phase.status === "in-progress" && "animate-spin"
               )}
             />
             <div className="min-w-0 flex-1">
-              <div className={cn("font-medium truncate", config.color)}>
+              <div className="font-semibold uppercase tracking-wider truncate text-[10px]">
                 {phase.name}
               </div>
-              <div className="text-muted-foreground">
+              <div className="font-mono text-[10px] opacity-60">
                 {fileCount} file{fileCount !== 1 ? "s" : ""}
               </div>
             </div>

@@ -36,10 +36,12 @@ export default function Dashboard() {
   return (
     <div className="flex flex-col gap-6">
       {/* Page header */}
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight">Dashboard</h1>
-        <p className="text-sm text-muted-foreground mt-1">
-          Your brand knowledge at a glance
+      <div className="border-b border-foreground pb-6">
+        <h1 className="text-4xl lg:text-5xl font-bold uppercase tracking-tighter leading-none">
+          Dashboard
+        </h1>
+        <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mt-3 font-mono">
+          Knowledge Base Status / System Health
         </p>
       </div>
 
@@ -99,12 +101,11 @@ export default function Dashboard() {
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">Domain Coverage</CardTitle>
-          </CardHeader>
-          <CardContent>
+      <div className="grid grid-cols-1 gap-0 lg:grid-cols-2">
+        <div className="border border-foreground p-6 lg:-mr-px">
+          <div className="text-[10px] font-semibold uppercase tracking-[0.3em] text-muted-foreground mb-4">
+            Domain Coverage
+          </div>
             {healthQ.isLoading ? (
               <div className="flex flex-col gap-3">
                 <Skeleton className="h-5 w-full" />
@@ -122,14 +123,13 @@ export default function Dashboard() {
                 }))}
               />
             ) : null}
-          </CardContent>
-        </Card>
+        </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">File Status Breakdown</CardTitle>
-          </CardHeader>
-          <CardContent className="flex items-center justify-center">
+        <div className="border border-foreground p-6 flex flex-col">
+          <div className="text-[10px] font-semibold uppercase tracking-[0.3em] text-muted-foreground mb-4">
+            File Status Breakdown
+          </div>
+          <div className="flex-1 flex items-center justify-center">
             {healthQ.isLoading ? (
               <Skeleton className="size-40 rounded-full" />
             ) : health ? (
@@ -140,28 +140,29 @@ export default function Dashboard() {
                 needsReview={health.needsReviewFiles}
               />
             ) : null}
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
 
       {/* Quick actions */}
-      <div className="flex flex-wrap gap-3">
-        <Button asChild>
-          <Link to="/settings">
-            <Play className="size-4" />
-            Start Setup
-          </Link>
-        </Button>
-        <Button
-          variant="outline"
+      <div className="flex flex-wrap gap-0">
+        <Link
+          to="/settings"
+          className="border border-foreground px-6 py-3 text-xs font-bold uppercase tracking-[0.2em] hover:bg-foreground hover:text-background transition-colors flex items-center gap-2"
+        >
+          <Play className="size-3.5" />
+          Start Setup
+        </Link>
+        <button
+          className="border border-foreground -ml-px px-6 py-3 text-xs font-bold uppercase tracking-[0.2em] hover:bg-foreground hover:text-background transition-colors flex items-center gap-2"
           onClick={() => {
             healthQ.refetch();
             progressQ.refetch();
           }}
         >
-          <RefreshCw className="size-4" />
-          Run Health Check
-        </Button>
+          <RefreshCw className="size-3.5" />
+          Health Check
+        </button>
       </div>
     </div>
   );

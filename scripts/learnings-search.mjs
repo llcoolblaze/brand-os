@@ -26,6 +26,38 @@ const LEARNINGS_FILE = join(PROJECT_ROOT, 'workspace', 'learnings.jsonl');
 const DECAY_RATE = 1; // points per 30 days
 const DECAY_PERIOD = 30 * 24 * 60 * 60 * 1000; // 30 days in ms
 
+// Help flag
+if (process.argv.includes('--help') || process.argv.includes('-h')) {
+  console.log(`
+  Learnings Search — GTM learnings search with confidence decay
+
+  Search the learnings JSONL with confidence decay, dedup, and filtering.
+  Markets change fast — confidence decays 1 point per 30 days.
+
+  Usage:
+    node scripts/learnings-search.mjs [flags]
+
+  Examples:
+    node scripts/learnings-search.mjs                          # Show all
+    node scripts/learnings-search.mjs --type pattern           # Filter by type
+    node scripts/learnings-search.mjs --query "subject line"   # Keyword search
+    node scripts/learnings-search.mjs --skill outbound-copywriter
+    node scripts/learnings-search.mjs --domain 02-outbound-systems
+    node scripts/learnings-search.mjs --min-confidence 5       # Minimum confidence
+    node scripts/learnings-search.mjs --limit 10               # Limit results
+
+  Flags:
+    --help, -h            Show this help message
+    --type <type>         Filter by type (pattern, pitfall, preference, insight, win)
+    --query <text>        Keyword search in key and learning text
+    --skill <name>        Filter by skill name
+    --domain <name>       Filter by domain
+    --min-confidence <n>  Minimum confidence threshold (after decay)
+    --limit <n>           Max results to show (default: 50)
+  `);
+  process.exit(0);
+}
+
 function parseArgs(args) {
   const opts = { type: null, query: null, skill: null, domain: null, minConfidence: 0, limit: 50 };
   for (let i = 0; i < args.length; i++) {

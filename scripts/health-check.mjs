@@ -23,6 +23,31 @@ const VALID_STATUSES = ['template', 'draft', 'active', 'needs-review'];
 const VALID_CONFIDENCE = ['low', 'medium', 'high'];
 const STALE_DAYS = 90;
 
+// Help flag
+if (process.argv.includes('--help') || process.argv.includes('-h')) {
+  console.log(`
+  Health Check — Knowledge base integrity validator
+
+  Walks my-context-os/, parses YAML frontmatter, and reports:
+    - Missing required frontmatter fields
+    - Stale documents (not validated in >90 days)
+    - Broken depends_on cross-references
+    - Files still in "template" status
+    - Files with low confidence
+
+  Usage:
+    node scripts/health-check.mjs
+
+  Examples:
+    node scripts/health-check.mjs
+    node scripts/health-check.mjs --help
+
+  Flags:
+    --help, -h    Show this help message
+  `);
+  process.exit(0);
+}
+
 // ── Frontmatter parser ──────────────────────────────────────────────
 
 function parseFrontmatter(content) {

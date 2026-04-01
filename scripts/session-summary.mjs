@@ -21,6 +21,30 @@ const PROJECT_ROOT = decodeURIComponent(new URL('..', import.meta.url).pathname)
 const HANDOFF_LOG = join(PROJECT_ROOT, 'workspace', 'handoff-log.md');
 const CURRENT_SESSION = join(PROJECT_ROOT, 'workspace', 'current-session.md');
 
+// Help flag
+if (process.argv.includes('--help') || process.argv.includes('-h')) {
+  console.log(`
+  Session Summary — Session indexer and handoff logger
+
+  Creates a timestamped summary entry in workspace/handoff-log.md
+  with session topics, decisions, and open items. Also updates
+  workspace/current-session.md for next-session context.
+
+  Usage:
+    node scripts/session-summary.mjs "<description>"
+    node scripts/session-summary.mjs
+
+  Examples:
+    node scripts/session-summary.mjs "Built outbound email sequence for enterprise ICP"
+    node scripts/session-summary.mjs "Refined voice DNA and updated positioning doc"
+    node scripts/session-summary.mjs   # Interactive mode (reads from stdin)
+
+  Flags:
+    --help, -h    Show this help message
+  `);
+  process.exit(0);
+}
+
 function timestamp() {
   return new Date().toISOString().replace('T', ' ').replace(/\.\d+Z/, ' UTC');
 }

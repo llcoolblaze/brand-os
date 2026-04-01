@@ -19,6 +19,35 @@ import { join, dirname } from 'node:path';
 const PROJECT_ROOT = decodeURIComponent(new URL('..', import.meta.url).pathname);
 const CONFIG_FILE = join(PROJECT_ROOT, 'workspace', 'config.yaml');
 
+// Help flag
+if (process.argv.includes('--help') || process.argv.includes('-h')) {
+  console.log(`
+  Config — Brand OS configuration manager
+
+  Simple get/set/list for persistent user preferences.
+  Stores configuration in workspace/config.yaml.
+
+  Usage:
+    node scripts/config.mjs <command> [key] [value]
+
+  Commands:
+    get <key>           Read a configuration value
+    set <key> <value>   Write a configuration value
+    list                Show all configuration values
+
+  Examples:
+    node scripts/config.mjs list
+    node scripts/config.mjs get company_name
+    node scripts/config.mjs set company_name "Acme Corp"
+    node scripts/config.mjs set active_channels "[email, linkedin, twitter]"
+    node scripts/config.mjs set auto_learnings true
+
+  Flags:
+    --help, -h    Show this help message
+  `);
+  process.exit(0);
+}
+
 const DEFAULT_CONFIG = `# Brand OS Configuration
 # Managed by: node scripts/config.mjs set <key> <value>
 

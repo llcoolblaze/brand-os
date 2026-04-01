@@ -20,6 +20,34 @@ import { join, relative, basename, dirname } from 'node:path';
 const PROJECT_ROOT = decodeURIComponent(new URL('..', import.meta.url).pathname);
 const KB_ROOT = decodeURIComponent(join(PROJECT_ROOT, 'my-context-os'));
 
+// Help flag
+if (process.argv.includes('--help') || process.argv.includes('-h')) {
+  console.log(`
+  Post Ingest — Frontmatter auto-fixer
+
+  Takes a markdown file (or scans all of my-context-os/) and ensures
+  proper YAML frontmatter exists with all required fields.
+  Missing fields are populated with sensible defaults.
+
+  Usage:
+    node scripts/post-ingest.mjs <file>
+    node scripts/post-ingest.mjs --all
+    node scripts/post-ingest.mjs --dry-run --all
+
+  Examples:
+    node scripts/post-ingest.mjs my-context-os/01-gtm-strategy/icp.md
+    node scripts/post-ingest.mjs --all
+    node scripts/post-ingest.mjs --dry-run --all
+    node scripts/post-ingest.mjs --dry-run my-context-os/03-voice/tone-guide.md
+
+  Flags:
+    --help, -h    Show this help message
+    --all         Process all markdown files in my-context-os/
+    --dry-run     Preview changes without modifying files
+  `);
+  process.exit(0);
+}
+
 const REQUIRED_FIELDS = {
   title: (filePath) => {
     // Derive title from filename: "my-file.md" → "My File"
